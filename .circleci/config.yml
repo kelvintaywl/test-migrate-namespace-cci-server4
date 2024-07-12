@@ -1,0 +1,33 @@
+version: 2.1
+
+# we will test the use of an orb & runner resource-class for this namespace
+
+orbs:
+  greeting: kelvintaywl-cci/greeting
+
+executors:
+  lightsail:
+    machine: true
+    resource-class: kelvintaywl-cci/lightsail-medium
+  alpine:
+    docker:
+      - image: alpine:latest
+    resource_class: small
+
+jobs:
+  use-orb:
+    executor: alpine
+    steps:
+      - greeting/greet:
+          to: stranger
+  use-runner:
+    executor: lightsail
+    steps:
+      - greeting/greet:
+          to: stranger
+
+workflows:
+  test:
+    jobs:
+      - use-orb
+      - use-runner
