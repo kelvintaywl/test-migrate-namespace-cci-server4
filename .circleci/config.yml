@@ -8,7 +8,7 @@ orbs:
 executors:
   lightsail:
     machine: true
-    resource-class: kelvintaywl-cci/lightsail-medium
+    resource_class: kelvintaywl-cci/lightsail-medium
   alpine:
     docker:
       - image: alpine:latest
