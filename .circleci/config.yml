@@ -6,9 +6,12 @@ orbs:
   greeting: kelvintaywl-cci/greeting@1.0.0
 
 executors:
-  lightsail:
+  lightsail-from-transferred:
     machine: true
     resource_class: kelvintaywl-cci/lightsail-medium
+  lightsail-original:
+    machine: true
+    resource_class: kelvintaywl/lightsail-medium
   alpine:
     docker:
       - image: alpine:latest
@@ -21,7 +24,10 @@ jobs:
       - greeting/greet:
           to: stranger
   use-runner:
-    executor: lightsail
+    parameters:
+      exec:
+        type: executor
+    executor: << parameters.exec >>
     steps:
       - greeting/greet:
           to: stranger
@@ -30,4 +36,8 @@ workflows:
   test:
     jobs:
       - use-orb
-      - use-runner
+      - use-runner:
+          matrix:
+            exec:
+              - lightsail-from-transferred
+              - lightsail-original
