@@ -38,6 +38,7 @@ workflows:
       - use-orb
       - use-runner:
           matrix:
-            exec:
-              - lightsail-from-transferred
-              - lightsail-original
+            parameters:
+              exec:
+                - lightsail-from-transferred
+                - lightsail-original
