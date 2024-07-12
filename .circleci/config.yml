@@ -3,7 +3,7 @@ version: 2.1
 # we will test the use of an orb & runner resource-class for this namespace
 
 orbs:
-  greeting: kelvintaywl-cci/greeting
+  greeting: kelvintaywl-cci/greeting@1.0.0
 
 executors:
   lightsail:
